@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<title></title>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?90b728e271c36bba7dbaf721120d177d";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+	<script>
+		$(function () {
+			var arr = [
+				[false]
+			];
+			var arrLength;
+			function draw(arr) {
+				$(".container").empty();
+				for (var i = 0; i < arr.length; i++) {
+					var parent = $(".container").append("<div></div>").children("div").eq(i).addClass("row");
+					for (var j = 0; j < arr[i].length; j++) {
+						var temp = $(".container").children(".row").eq(i)
+							.append("<div></div>")
+							.find("div").eq(j).addClass("box").addClass(function () {
+								if (!arr[i][j]) {
+									return "unselected";
+								} else {
+									return "selected";
+								}
+							})
+							.attr("value", arr[i][j])
+							.attr("position", i + "," + j)
+
+					}
+				}
+
+				$(".box").on("click", function () {
+					var posArr = $(this).attr("position").split(",");
+					var x = +posArr[0];
+					var y = +posArr[1];
+
+					if (undefined !== arr[x - 1]) {
+						if (undefined !== arr[x - 1][y]) {
+							arr[x - 1][y] = !arr[x - 1][y];
+						}
+
+					}
+					if (undefined !== arr[x + 1]) {
+						if (undefined !== arr[x + 1][y]) {
+							arr[x + 1][y] = !arr[x + 1][y];
+						}
+
+					}
+					if (undefined !== arr[x]) {
+						if (undefined !== arr[x][y - 1]) {
+							arr[x][y - 1] = !arr[x][y - 1];
+						}
+
+					}
+					if (undefined !== arr[x]) {
+						if (undefined !== arr[x][y + 1]) {
+							arr[x][y + 1] = !arr[x][y + 1];
+						}
+
+					}
+					arr[x][y] = !arr[x][y];
+					draw(arr);
+				});
+
+				var test = function () {
+					for (var n = 0; n < arr.length; n++) {
+						for (var m = 0; m < arr[n].length; m++) {
+							if (!arr[n][m]) {
+								return false;
+							}
+						}
+					}
+					alert("you done it!!");
+
+					var newArr = new Array();
+					for (var k = 0; k < arr.length + 1; k++) {
+						newArr[k] = new Array();
+						for (var h = 0; h < arr.length + 1; h++) {
+							newArr[k][h] = false;
+						}
+					}
+					arr = newArr;
+					arrLength = arr.length;
+					draw(arr);
+				}
+				test();
+				arrLength = arr.length;
+			}
+
+
+
+			draw(arr);
+
+			$(".confirm").on("click", function () {
+				if ($("input").val() > 10 || $("input").val() < 1 || "" == $("input").val()) {
+					return false;
+				}
+				var newArr = new Array();
+				for (var k = 0; k < $("input").val(); k++) {
+					newArr[k] = new Array();
+					for (var h = 0; h < $("input").val(); h++) {
+						newArr[k][h] = false;
+					}
+				}
+				arr = newArr;
+				draw(arr);
+			})
+
+			$(".retry").on("click", function () {
+				console.log(arrLength);
+				console.log(arr);
+				var reTryArr = [];
+				for (var k = 0; k < arrLength; k++) {
+					reTryArr[k] = [];
+					for (var h = 0; h < arrLength; h++) {
+						reTryArr[k][h] = false;
+					}
+				}
+				arr = reTryArr;
+
+				draw(arr);
+			})
+		})
+
+	</script>
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding-top: 40px;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		.container {
+			margin-top: 60px;
+		}
+
+		.row {
+			width: auto;
+			margin: 0 auto;
+			text-align: center;
+			font-size: 0px;
+		}
+
+		.box {
+			display: inline-block;
+			height: 80px;
+			width: 80px;
+			border: 5px solid black;
+			margin-right: -5px;
+			margin-bottom: -5px;
+		}
+
+		.unselected {
+			background-color: #e6ab5e;
+		}
+
+		.selected {
+			background-color: #5c90ff;
+		}
+
+		p {
+			margin-top: 30px;
+			text-align: center;
+		}
+
+		input {
+			height: 30px;
+			width: 100px;
+		}
+
+		button {
+			height: 30px;
+			width: 60px;
+			font-size: 16px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>变色方块</h1>
+	<p>玩法说明：点击方块使得颜色翻转<br>所有方块均翻转就算胜利！</p>
+	<div class="container">
+	</div>
+	<p>
+		选择难度(1 ~ 10)
+		<input type="number" max=10 min=1>
+		<br><br>
+		<button class="confirm">确定</button>
+		<button class="retry">重来</button>
+	</p>
+</body>
+
+</html>

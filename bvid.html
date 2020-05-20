@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<!-- 新 Bootstrap4 核心 CSS 文件 -->
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+	<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+	<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script>
+		var _hmt = _hmt || [];
+		(function () {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?90b728e271c36bba7dbaf721120d177d";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script>
+</head>
+
+<body class="my-3">
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<h3>
+					输入BVID
+				</h3>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<form role="form">
+					<div class="form-group">
+						<input type="text" name="bvid" class="form-control" id="text">
+					</div>
+					<button type="submit" class="btn btn-outline-primary">
+						GO
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script language="javascript" type="text/javascript">
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split("&");
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] == variable) {
+				return pair[1];
+			}
+		}
+		return (false);
+	}
+	function open_new_window(full_link) {
+		window.open('javascript:window.name;', '<script>location.replace("' + full_link + '")<\/script>');
+	}
+	function callbackFunction(e) {
+		console.log(e);
+		open_new_window("https://b23.tv/av" + e.data.aid);
+	}
+
+	var bvid = getQueryVariable("bvid");
+	if (bvid) {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "https://jsonp.afeld.me/?callback=callbackFunction&url=https%3A%2F%2Fapi.bilibili.com%2Fx%2Fweb-interface%2Fview%3Fbvid%3D" + bvid;
+		document.body.appendChild(script);
+
+	}
+</script>
+
+</html>
