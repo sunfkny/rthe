@@ -88,9 +88,10 @@
 
 			clipboard.on('error', function (e) {
 				// console.error('Action:', e.action);
+				// console.info('Text:', e.text);
 				// console.error('Trigger:', e.trigger);
 				console.error(e);
-				showTip("danger", "<strong>复制失败：</strong>" + e);
+				showTip("danger", "<strong>复制失败：</strong>" + JSON.stringify(e));
 
 			});
 			$(jspath).css("cursor", "pointer");
