@@ -64,16 +64,19 @@
 		</div>
 	</div>
 	<script language="javascript" type="text/javascript">
+
 		function timestamp(url) {
 			var getTimestamp = new Date().getTime();
 			url = url + "?timestamp=" + getTimestamp
 			return url;
 		}
+
 		function cors(url) {
 			url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
-			// url = "https://jsonp.afeld.me/?url=" + encodeURIComponent(url);
+			// use timestamp to disable cache
 			return url;
 		}
+
 		function copyof(jspath) {
 			console.log($(jspath)[0]);
 			clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text(); } });
@@ -116,6 +119,7 @@
 				$('#tips').append($(`<div class="alert alert-info"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
 			}
 		}
+
 		function parseDom(arg) {
 			var objE = document.createElement("div");
 			objE.innerHTML = arg;
@@ -126,10 +130,8 @@
 		$(document).ready(function () {
 			$('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
-			// https://www.zkq8.com/v2ray_link.txt
 			$("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
 
-				// $("#div1 > p:nth-child(2)").remove();
 				// console.log(response);
 				// console.log(status);
 				console.log(xhr);
@@ -137,10 +139,6 @@
 
 				// $("#div1 > table").css("width", "100%").addClass("table table-sm table-bordered table-responsive-sm");
 				$("#div1 > table").addClass("table table-bordered");
-
-				// if ($("#div1 > p:nth-child(2)").text()=="恭喜你，你脚本已经是最新，每周一更新密码和端口"){
-				// 	$("#div1 > p:nth-child(2)").remove();
-				// }
 
 				console.group("remove tip");
 				$("#div1 > p").each(function (i) {
@@ -150,7 +148,6 @@
 					};
 				});
 				console.groupEnd();
-
 
 				console.group("simplify title");
 				server = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(2)");
@@ -172,7 +169,6 @@
 					console.log(port.text());
 				}
 				console.groupEnd();
-
 
 				for (var i = 2; i <= $("#div1 > table > tbody > tr").length; i++) {
 					if ($("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text().indexOf("trojan") >= 0) {
@@ -198,7 +194,6 @@
 				}
 
 				showTip("<strong>提示：</strong>点击可直接复制", "info");
-				// $('#tips').append($(`<div class="alert alert-info"></div>`).append("<strong>提示：</strong>点击可直接复制").hide().delay(200).fadeIn(200).delay(1500).fadeOut(200, function () { this.remove() }));
 
 			});
 
