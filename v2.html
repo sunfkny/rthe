@@ -78,7 +78,7 @@
 			console.log($(jspath)[0]);
 			clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text(); } });
 			clipboard.on('success', function (e) {
-				showTip("success", "<strong>复制成功：</strong>" + e.text);
+				showTip("<strong>复制成功：</strong>" + e.text, "success");
 				// console.info('Action:', e.action);
 				// console.info('Text:', e.text);
 				// console.info('Trigger:', e.trigger);
@@ -91,20 +91,29 @@
 				// console.info('Text:', e.text);
 				// console.error('Trigger:', e.trigger);
 				console.error(e);
-				showTip("danger", "<strong>复制失败：</strong>" + JSON.stringify(e));
+				showTip("<strong>复制失败：</strong>" + JSON.stringify(e), "danger");
 
 			});
 			$(jspath).css("cursor", "pointer");
 			return clipboard;
 		}
 
-		function showTip(type, msg) {
+		function showTip(msg, type, time) {
 			if (type == "success") {
-				$('#tips').append($(`<div class="alert alert-success"></div>`).append(msg).hide().fadeIn(200).delay(1000).fadeOut(200, function () { this.remove() }));
+				if (time == undefined) {
+					time = 1000;
+				}
+				$('#tips').append($(`<div class="alert alert-success"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
 			} else if (type == "danger") {
-				$('#tips').append($(`<div class="alert alert-danger"></div>`).append(msg).hide().fadeIn(200).delay(5000).fadeOut(200, function () { this.remove() }));
+				if (time == undefined) {
+					time = 5000;
+				}
+				$('#tips').append($(`<div class="alert alert-danger"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
 			} else {
-				$('#tips').append($(`<div class="alert alert-info"></div>`).append(msg).hide().fadeIn(200).delay(2000).fadeOut(200, function () { this.remove() }));
+				if (time == undefined) {
+					time = 1500;
+				}
+				$('#tips').append($(`<div class="alert alert-info"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
 			}
 		}
 		function parseDom(arg) {
@@ -188,7 +197,7 @@
 
 				}
 
-				showTip("info", "<strong>提示：</strong>点击可直接复制");
+				showTip("<strong>提示：</strong>点击可直接复制", "info");
 				// $('#tips').append($(`<div class="alert alert-info"></div>`).append("<strong>提示：</strong>点击可直接复制").hide().delay(200).fadeIn(200).delay(1500).fadeOut(200, function () { this.remove() }));
 
 			});
