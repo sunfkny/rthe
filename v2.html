@@ -74,7 +74,7 @@
 		function cors(url) {
 			// url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
 			// 自建高速cors api
-			url = timestamp("http://47.115.132.44/cors?url=" + encodeURIComponent(url));
+			url = timestamp("http://47.115.132.44/cors?url=" + url);
 			// use timestamp to disable cache
 			return url;
 		}
