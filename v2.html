@@ -154,19 +154,19 @@
 				console.group("simplify title");
 				server = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(2)");
 				console.log(server.text());
-				if (server.text() == "----server address----") {
+				if (server.text().indexOf("server address")) {
 					server.text("server address");
 					console.log(server.text());
 				}
 				password = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(3)");
 				console.log(password.text());
-				if (password.text() == "----password----") {
+				if (password.text().indexOf("password")) {
 					password.text("password");
 					console.log(password.text());
 				}
 				port = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(4)");
 				console.log(port.text());
-				if (port.text() == "----port----") {
+				if (port.text().indexOf("port")) {
 					port.text("port");
 					console.log(port.text());
 				}
@@ -174,7 +174,7 @@
 
 				for (var i = 2; i <= $("#div1 > table > tbody > tr").length; i++) {
 					if ($("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text().indexOf("trojan") >= 0) {
-						$("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text("trojan");
+						// $("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text("trojan");
 						let server = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(2)";
 						let password = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(3)";
 						let port = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(4)";
