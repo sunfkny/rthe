@@ -153,6 +153,7 @@
 
 				console.group("simplify title");
 				type = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
+				console.log(type.text());
 				if (type.text().indexOf("类型")) {
 					type.text("类型");
 					console.log(type.text());
