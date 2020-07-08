@@ -28,7 +28,7 @@
     <div class="container mt-3">
         <div class="row clearfix">
             <div class="col-md-12 column">
-                <h3 data-toggle="collapse" data-target="#tools"> • 工具 </h3>
+                <h3> • 工具 </h3>
             </div>
         </div>
     </div>
@@ -46,24 +46,9 @@
 
 
     <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
         function bh3cn() {
-
             url = "https://jsonp.afeld.me/?url=https%3A%2F%2Fwww.bh3.com%2Fcontent%2Fbh3Cn%2FgetContentList%3FpageSize%3D100%26pageNum%3D1%26channelId%3D177"
-
-            var funDownload = function (content, filename) {
-                var eleLink = document.createElement('a');
-                eleLink.download = filename;
-                eleLink.style.display = 'none';
-                var blob = new Blob([content]);
-                eleLink.href = URL.createObjectURL(blob);
-                document.body.appendChild(eleLink);
-                eleLink.click();
-                document.body.removeChild(eleLink);
-            };
-
+            var funDownload = function (content, filename) {var eleLink = document.createElement('a');eleLink.download = filename;eleLink.style.display = 'none';var blob = new Blob([content]);eleLink.href = URL.createObjectURL(blob);document.body.appendChild(eleLink);eleLink.click();document.body.removeChild(eleLink);};
             $.getJSON(url, function (result) { li = ''; result.data.list.forEach(function (i) { li += i.ext[0].value[0].url + '\n' }); console.group("获取图片链接数：" + result.data.list.length + " of " + result.data.total); console.log(li); console.groupEnd(); funDownload(li, "bh3wallpaper.txt") })
         }
     </script>
