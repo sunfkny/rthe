@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?90b728e271c36bba7dbaf721120d177d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body class="my-3">
+    <div class="container mt-3">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <h3 data-toggle="collapse" data-target="#tools"> • 工具 </h3>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container collapse show" id="tools">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-3">
+                <a type="a" class="btn btn-outline-primary my-2 container" onclick="bh3cn()">崩坏3国服壁纸</a>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+        function bh3cn() {
+
+            url = "https://jsonp.afeld.me/?url=https%3A%2F%2Fwww.bh3.com%2Fcontent%2Fbh3Cn%2FgetContentList%3FpageSize%3D100%26pageNum%3D1%26channelId%3D177"
+
+            var funDownload = function (content, filename) {
+                var eleLink = document.createElement('a');
+                eleLink.download = filename;
+                eleLink.style.display = 'none';
+                var blob = new Blob([content]);
+                eleLink.href = URL.createObjectURL(blob);
+                document.body.appendChild(eleLink);
+                eleLink.click();
+                document.body.removeChild(eleLink);
+            };
+
+            $.getJSON(url, function (result) { li = ''; result.data.list.forEach(function (i) { li += i.ext[0].value[0].url + '\n' }); console.group("获取图片链接数：" + result.data.list.length + " of " + result.data.total); console.log(li); console.groupEnd(); funDownload(li, "bh3wallpaper.txt") })
+        }
+    </script>
+</body>
+
+</html>
