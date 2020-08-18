@@ -29,7 +29,7 @@
 			return (false);
 		}
 
-		var s = getQueryVariable("s").replace(new RegExp(/[+]/g), '');
+		var s = getQueryVariable("s").replace(new RegExp("%20","gm"), '').replace(new RegExp("%C2%A0","gm"),'').replace(new RegExp("[+]","gm"),'').replace(new RegExp(" ","gm"),'');
 		var link = "https://pan.baidu.com/s/"
 
 		if (s.length == 28) {
