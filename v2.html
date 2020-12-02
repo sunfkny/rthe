@@ -151,33 +151,36 @@
 				});
 				console.groupEnd();
 
-				console.group("simplify title");
-				type = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
-				console.log(type.text());
-				if (type.text().indexOf("类型")) {
-					type.text("类型");
-					console.log(type.text());
-				}
-				server = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(2)");
-				console.log(server.text());
-				if (server.text().indexOf("server address")) {
-					server.text("server address");
-					console.log(server.text());
-				}
-				password = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(3)");
-				console.log(password.text());
-				if (password.text().indexOf("password")) {
-					password.text("password");
-					console.log(password.text());
-				}
-				port = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(4)");
-				console.log(port.text());
-				if (port.text().indexOf("port")) {
-					port.text("port");
-					console.log(port.text());
-				}
-				console.groupEnd();
-
+				// console.group("simplify title");
+				// type = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
+				// console.log(type.text());
+				// if (type.text().indexOf("类型")) {
+				// 	type.text("类型");
+				// 	console.log(type.text());
+				// }
+				// server = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(2)");
+				// console.log(server.text());
+				// if (server.text().indexOf("server address")) {
+				// 	server.text("server address");
+				// 	console.log(server.text());
+				// }
+				// password = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(3)");
+				// console.log(password.text());
+				// if (password.text().indexOf("password")) {
+				// 	password.text("password");
+				// 	console.log(password.text());
+				// }
+				// port = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(4)");
+				// console.log(port.text());
+				// if (port.text().indexOf("port")) {
+				// 	port.text("port");
+				// 	console.log(port.text());
+				// }
+				// console.groupEnd();
+				$("#div1 > table > tbody > tr:nth-child(2) > td:nth-child(1)").remove();
+				$("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)").remove();
+				rownum=$("#div1 > table > tbody > tr").length;
+				$("#div1 > table > tbody > tr:nth-child("+rownum+")").remove();
 				for (var i = 2; i <= $("#div1 > table > tbody > tr").length; i++) {
 					if ($("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text().indexOf("trojan") >= 0) {
 						// $("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text("trojan");
