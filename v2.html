@@ -66,16 +66,16 @@
 	<script language="javascript" type="text/javascript">
 
 		function timestamp(url) {
+			// use timestamp to disable cache
 			var getTimestamp = new Date().getTime();
 			url = url + "&timestamp=" + getTimestamp
 			return url;
 		}
 
 		function cors(url) {
-			// use timestamp to disable cache
-			url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
-			// 自建高速cors api ，需要https，咕咕咕
-			// url = timestamp("http://47.115.132.44/cors?url=" + url);
+			//url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
+			// 自建cors
+			 url = timestamp("https://cors.sunfkny.workers.dev/" + encodeURIComponent(url));
 			return url;
 		}
 
