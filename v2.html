@@ -129,27 +129,55 @@
 			return objE;
 		};
 
+		function readXPath(el) {
+			// 标准CSS路径
+			if (!(el instanceof Element))
+				return;
+			let path = [];
+			while (el.nodeType === Node.ELEMENT_NODE) {
+				let selector = el.nodeName.toLowerCase();
+				if (el.id) {
+					selector += '#' + el.id;
+					path.unshift(selector);
+					break;
+				} else {
+					let sib = el, nth = 1;
+					while (sib = sib.previousElementSibling) {
+						if (sib.nodeName.toLowerCase() == selector)
+							nth++;
+					}
+					if (nth != 1)
+						selector += ":nth-of-type(" + nth + ")";
+				}
+				path.unshift(selector);
+				el = el.parentNode;
+			}
+			return path.join(" > ");
+		}
+
 		$(document).ready(function () {
 			$('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
 			$("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
 
-				// console.log(response);
+				console.group("load response");
 				// console.log(status);
 				console.log(xhr);
+				// console.log(response);
 				console.log(parseDom(response));
+				console.groupEnd();
 
 				// $("#div1 > table").css("width", "100%").addClass("table table-sm table-bordered table-responsive-sm");
 				$("#div1 > table").addClass("table table-bordered");
 
-				console.group("remove tip");
-				$("#div1 > p").each(function (i) {
-					if ($(this).text().indexOf("恭喜你，你脚本已经是最新，每周一更新密码和端口") >= 0) {
-						console.log($(this)[0]);
-						$(this).remove();
-					};
-				});
-				console.groupEnd();
+				// console.group("remove tip");
+				// $("#div1 > p").each(function (i) {
+				// 	if ($(this).text().indexOf("恭喜你，你脚本已经是最新，每周一更新密码和端口") >= 0) {
+				// 		console.log($(this)[0]);
+				// 		$(this).remove();
+				// 	};
+				// });
+				// console.groupEnd();
 
 				// console.group("simplify title");
 				// type = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
@@ -177,13 +205,37 @@
 				// 	console.log(port.text());
 				// }
 				// console.groupEnd();
-				$("#div1 > table > tbody > tr:nth-child(2) > td:nth-child(1)").remove();
-				$("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)").remove();
-				rownum=$("#div1 > table > tbody > tr").length;
-				$("#div1 > table > tbody > tr:nth-child("+rownum+")").remove();
-				for (var i = 2; i <= $("#div1 > table > tbody > tr").length; i++) {
-					if ($("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text().indexOf("trojan") >= 0) {
-						// $("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text("trojan");
+
+				qrcode = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
+				if (qrcode.html().indexOf("二维码") >= 0) {
+					console.group("simplify qrcode");
+					console.log(qrcode[0]);
+					qrcode.remove();
+					console.groupEnd();
+				}
+
+				qrcode_img = $("#div1 > table > tbody > tr:nth-child(2) > td:nth-child(1)");
+				if (qrcode_img.html().indexOf("img") >= 0) {
+					console.group("simplify qrcode img");
+					console.log(qrcode_img[0]);
+					qrcode_img.remove();
+					console.groupEnd();
+				}
+
+				rownum = $("#div1 > table > tbody > tr").length;
+				for (var i = 2; i <= rownum; i++) {
+					row = $("#div1 > table > tbody > tr:nth-child(" + i + ")");
+					if (row.text().indexOf("回复") >= 0 || row.text().indexOf("公众号") >= 0) {
+						console.group("simplify wechat");
+						console.log(row.html());
+						row.remove();
+						console.groupEnd();
+					}
+					if ($("td:nth-child(1)", row).text().indexOf("trojan") >= 0) {
+						console.group("simplify type");
+						console.log($("td:nth-child(1)", row).html());
+						$("td:nth-child(1)", row).text("trojan");
+						console.groupEnd();
 						let server = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(2)";
 						let password = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(3)";
 						let port = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(4)";
