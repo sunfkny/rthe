@@ -17,15 +17,23 @@
             function search(){
                 console.log(input.value);
                 title=input.value;
-                ans="";
+                
+                anslist=[];
 
                 for(i of data){
-                    if(similar(i[0],title)>0.5){
-                        ans+=i[0]+'&nbsp;&nbsp;&nbsp;&nbsp;'+i[1]+'<br>'
+                	rate=similar(i[0],title);
+                    if(rate>0.5){
+                        anslist.push([rate,i[0]+'&nbsp;&nbsp;&nbsp;&nbsp;'+i[1]+'<br>']);
                     }
                 }
-                document.querySelector('#area').innerHTML=ans;
+
+                anslist.sort((a,b)=>b[0]-a[0]);
+                for(ans of anslist){
+                    document.querySelector('#area').innerHTML+=ans[1];
+                }
+                
             }
+
         </script>
     </head>
     <body>
