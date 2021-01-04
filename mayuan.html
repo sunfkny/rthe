@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>马原题库</title>
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <script>
             function getQueryVariable(variable) {
@@ -19,6 +20,7 @@
                 title=input.value;
                 
                 anslist=[];
+                document.querySelector('#area').innerHTML='';
 
                 for(i of data){
                 	rate=similar(i[0],title);
