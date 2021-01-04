@@ -572,11 +572,11 @@
                 return res.toFixed(f)
             }
 
-            title=decodeURI(getQueryVariable("title"));
+            title=getQueryVariable("title");
             console.log(title);
             input=document.querySelector('input');
             if(title){
-                input.value=title;
+                input.value=decodeURI(title);
                 search();
             }else{
                 input.value="示例：群众路线的基本出发点和最终归宿是";
