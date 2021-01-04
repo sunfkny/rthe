@@ -592,6 +592,31 @@
                 input.value="示例：群众路线的基本出发点和最终归宿是";
                 search();
             }
+            dropZone=document.body;
+            dropZone.addEventListener( "dragenter" , function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false );
+            
+            dropZone.addEventListener( "dragover" , function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false );
+            
+            dropZone.addEventListener( "dragleave" , function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }, false );
+            
+            dropZone.addEventListener( "drop" , function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                e.dataTransfer.items[0].getAsString(function (str) {
+                    console.log('getAsString: ' + str); 
+                    input.value=str;
+                    search();   
+                });
+            });
 
             
         </script>
