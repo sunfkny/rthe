@@ -162,15 +162,15 @@
             $('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
             $("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
-            // $("#div1").load("./v2ray2_link.txt", function (response, status, xhr) {
+                // $("#div1").load("./v2ray2_link.txt", function (response, status, xhr) {
                 $("#div1").hide();
                 $("#div1 > table").addClass("table table-bordered");
 
-                
+
                 console.group("content of https://www.zkq8.com/v2ray2_link.txt");
                 window.resdom = parseDom(response);
                 console.log(resdom);
-                tip="";
+                tip = "";
                 for (i of resdom.children) {
                     if (i.tagName == "P") {
                         tip += i.innerText + "<br>"
@@ -179,9 +179,11 @@
                 $('#info').append($(`<div class="alert alert-success"></div>`).append(tip));
                 console.groupEnd();
 
+
+                $("#table1").hide();
                 console.group("torjan list");
                 trojan_list = getTrojan_list(response);
-                th="<th>server</th><th>password</th><th>port</th>"
+                th = "<tr><th>server</th><th>password</th><th>port</th></tr>"
                 $("#table1 > tbody").append(th);
                 for (trojan of trojan_list) {
                     console.log(trojan);
