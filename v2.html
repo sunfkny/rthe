@@ -61,9 +61,6 @@
                 <div id="div1"></div>
                 <table id="table1" style="margin-bottom: 0;" style="display: none;">
                     <tbody>
-                        <th>server</th>
-                        <th>password</th>
-                        <th>port</th>
                     </tbody>
                 </table>
             </div>
@@ -186,7 +183,6 @@
                 trojan_list = getTrojan_list(response);
                 th="<th>server</th><th>password</th><th>port</th>"
                 $("#table1 > tbody").append(th);
-		$("#table1").hide();
                 for (trojan of trojan_list) {
                     console.log(trojan);
                     html = `<tr><td>${trojan[0]}</td><td>${trojan[1]}</td><td>${trojan[2]}</td></tr>`;
