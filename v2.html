@@ -182,12 +182,11 @@
                 $('#info').append($(`<div class="alert alert-success"></div>`).append(tip));
                 console.groupEnd();
 
-                
-                $("#table1").hide();
                 console.group("torjan list");
                 trojan_list = getTrojan_list(response);
                 th="<th>server</th><th>password</th><th>port</th>"
                 $("#table1 > tbody").append(th);
+		$("#table1").hide();
                 for (trojan of trojan_list) {
                     console.log(trojan);
                     html = `<tr><td>${trojan[0]}</td><td>${trojan[1]}</td><td>${trojan[2]}</td></tr>`;
