@@ -39,230 +39,284 @@
 </head>
 
 <body class="my-3">
-	<div class="container">
-		<div class="row clearfix">
-			<div class="col-12 column">
-				<h3>
-					<a href="https://www.youhou8.com/group/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91">Free V2ray/Trojan</a>
-				</h3>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row clearfix">
-			<div class="col-12 column">
-				<div id="div1"></div>
-				<!-- <div id="div2"></div> -->
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row clearfix">
-			<div class="col-12 column">
-				<div id="tips" class="my-3"></div>
-			</div>
-		</div>
-	</div>
-	<script language="javascript" type="text/javascript">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12 column">
+                <h3>
+                    <a href="https://www.youhou8.com/group/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91">Free V2ray/Trojan</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12 column">
+                <div id="info" class="my-3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12 column">
+                <div id="div1"></div>
+                <table id="table1" style="margin-bottom: 0;" style="display: none;">
+                    <tbody>
+                        <th>server</th>
+                        <th>password</th>
+                        <th>port</th>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-12 column">
+                <div id="tips" class="my-3"></div>
+            </div>
+        </div>
+    </div>
+    <script language="javascript" type="text/javascript">
 
-		function timestamp(url) {
-			// use timestamp to disable cache
-			var getTimestamp = new Date().getTime();
-			url = url + "&timestamp=" + getTimestamp
-			return url;
-		}
+        function timestamp(url) {
+            // use timestamp to disable cache
+            var getTimestamp = new Date().getTime();
+            url = url + "&timestamp=" + getTimestamp
+            return url;
+        }
 
-		function cors(url) {
-			//url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
-			// 自建cors
-			url = "https://cors.sunfkny.workers.dev/" + encodeURIComponent(url);
-			return url;
-		}
+        function cors(url) {
+            // url = timestamp("https://jsonp.afeld.me/?url=" + encodeURIComponent(url));
+            // 自建cors
+            url = "https://cors.sunfkny.workers.dev/" + encodeURIComponent(url);
+            return url;
+        }
 
-		function copyof(jspath) {
-			console.log($(jspath)[0]);
-			clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text(); } });
-			clipboard.on('success', function (e) {
-				showTip("<strong>复制成功：</strong>" + e.text, "success");
-				// console.info('Action:', e.action);
-				// console.info('Text:', e.text);
-				// console.info('Trigger:', e.trigger);
-				console.info(e);
-				// e.clearSelection();
-			});
+        function copyof(jspath) {
+            console.log($(jspath)[0]);
+            clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text(); } });
+            clipboard.on('success', function (e) {
+                showTip("<strong>复制成功：</strong>" + e.text, "success");
+                // console.info('Action:', e.action);
+                // console.info('Text:', e.text);
+                // console.info('Trigger:', e.trigger);
+                console.info(e);
+                // e.clearSelection();
+            });
 
-			clipboard.on('error', function (e) {
-				// console.error('Action:', e.action);
-				// console.info('Text:', e.text);
-				// console.error('Trigger:', e.trigger);
-				console.error(e);
-				showTip("<strong>复制失败：</strong>" + JSON.stringify(e), "danger");
+            clipboard.on('error', function (e) {
+                // console.error('Action:', e.action);
+                // console.info('Text:', e.text);
+                // console.error('Trigger:', e.trigger);
+                console.error(e);
+                showTip("<strong>复制失败：</strong>" + JSON.stringify(e), "danger");
 
-			});
-			$(jspath).css("cursor", "pointer");
-			return clipboard;
-		}
+            });
+            $(jspath).css("cursor", "pointer");
+            return clipboard;
+        }
 
-		function showTip(msg, type, time) {
-			if (type == "success") {
-				if (time == undefined) {
-					time = 1000;
-				}
-				$('#tips').append($(`<div class="alert alert-success"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
-			} else if (type == "danger") {
-				if (time == undefined) {
-					time = 5000;
-				}
-				$('#tips').append($(`<div class="alert alert-danger"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
-			} else {
-				if (time == undefined) {
-					time = 1500;
-				}
-				$('#tips').append($(`<div class="alert alert-info"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
-			}
-		}
+        function showTip(msg, type, time) {
+            if (type == "success") {
+                if (time == undefined) {
+                    time = 1000;
+                }
+                $('#tips').append($(`<div class="alert alert-success"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
+            } else if (type == "danger") {
+                if (time == undefined) {
+                    time = 5000;
+                }
+                $('#tips').append($(`<div class="alert alert-danger"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
+            } else {
+                if (time == undefined) {
+                    time = 1500;
+                }
+                $('#tips').append($(`<div class="alert alert-info"></div>`).append(msg).hide().fadeIn(200).delay(time).fadeOut(200, function () { this.remove() }));
+            }
+        }
 
-		function parseDom(arg) {
-			var objE = document.createElement("div");
-			objE.innerHTML = arg;
-			// return objE.childNodes;
-			return objE;
-		};
+        function parseDom(arg) {
+            var objE = document.createElement("div");
+            objE.innerHTML = arg;
+            // return objE.childNodes;
+            return objE;
+        };
 
-		function readXPath(el) {
-			// 标准CSS路径
-			if (!(el instanceof Element))
-				return;
-			let path = [];
-			while (el.nodeType === Node.ELEMENT_NODE) {
-				let selector = el.nodeName.toLowerCase();
-				if (el.id) {
-					selector += '#' + el.id;
-					path.unshift(selector);
-					break;
-				} else {
-					let sib = el, nth = 1;
-					while (sib = sib.previousElementSibling) {
-						if (sib.nodeName.toLowerCase() == selector)
-							nth++;
-					}
-					if (nth != 1)
-						selector += ":nth-of-type(" + nth + ")";
-				}
-				path.unshift(selector);
-				el = el.parentNode;
-			}
-			return path.join(" > ");
-		}
+        var Base64 = {
+            // private property
+            _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
+            // public method for encoding
+            , encode: function (input) {
+                var output = "";
+                var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+                var i = 0;
+                input = Base64._utf8_encode(input);
+                while (i < input.length) {
+                    chr1 = input.charCodeAt(i++);
+                    chr2 = input.charCodeAt(i++);
+                    chr3 = input.charCodeAt(i++);
+                    enc1 = chr1 >> 2;
+                    enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                    enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                    enc4 = chr3 & 63;
+                    if (isNaN(chr2)) {
+                        enc3 = enc4 = 64;
+                    }
+                    else if (isNaN(chr3)) {
+                        enc4 = 64;
+                    }
+                    output = output +
+                        this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+                        this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+                } // Whend 
+                return output;
+            } // End Function encode 
+            // public method for decoding
+            , decode: function (input) {
+                var output = "";
+                var chr1, chr2, chr3;
+                var enc1, enc2, enc3, enc4;
+                var i = 0;
+                input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                while (i < input.length) {
+                    enc1 = this._keyStr.indexOf(input.charAt(i++));
+                    enc2 = this._keyStr.indexOf(input.charAt(i++));
+                    enc3 = this._keyStr.indexOf(input.charAt(i++));
+                    enc4 = this._keyStr.indexOf(input.charAt(i++));
+                    chr1 = (enc1 << 2) | (enc2 >> 4);
+                    chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                    chr3 = ((enc3 & 3) << 6) | enc4;
+                    output = output + String.fromCharCode(chr1);
+                    if (enc3 != 64) {
+                        output = output + String.fromCharCode(chr2);
+                    }
+                    if (enc4 != 64) {
+                        output = output + String.fromCharCode(chr3);
+                    }
+                } // Whend 
+                output = Base64._utf8_decode(output);
+                return output;
+            } // End Function decode 
+            // private method for UTF-8 encoding
+            , _utf8_encode: function (string) {
+                var utftext = "";
+                string = string.replace(/\r\n/g, "\n");
+                for (var n = 0; n < string.length; n++) {
+                    var c = string.charCodeAt(n);
+                    if (c < 128) {
+                        utftext += String.fromCharCode(c);
+                    }
+                    else if ((c > 127) && (c < 2048)) {
+                        utftext += String.fromCharCode((c >> 6) | 192);
+                        utftext += String.fromCharCode((c & 63) | 128);
+                    }
+                    else {
+                        utftext += String.fromCharCode((c >> 12) | 224);
+                        utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                        utftext += String.fromCharCode((c & 63) | 128);
+                    }
+                } // Next n 
+                return utftext;
+            } // End Function _utf8_encode 
+            // private method for UTF-8 decoding
+            , _utf8_decode: function (utftext) {
+                var string = "";
+                var i = 0;
+                var c, c1, c2, c3;
+                c = c1 = c2 = 0;
+                while (i < utftext.length) {
+                    c = utftext.charCodeAt(i);
+                    if (c < 128) {
+                        string += String.fromCharCode(c);
+                        i++;
+                    }
+                    else if ((c > 191) && (c < 224)) {
+                        c2 = utftext.charCodeAt(i + 1);
+                        string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                        i += 2;
+                    }
+                    else {
+                        c2 = utftext.charCodeAt(i + 1);
+                        c3 = utftext.charCodeAt(i + 2);
+                        string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                        i += 3;
+                    }
+                } // Whend 
+                return string;
+            } // End Function _utf8_decode 
 
-		$(document).ready(function () {
-			$('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
+        }
 
-			$("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
+        function getTrojan_list(str) {
+            let domstr = "";
+            domstr = str;
+            trojan_list = [];
+            var re = new RegExp("(?<=<b>)[^<]*(?=</b>)", "g");
+            for (i of domstr.split("\n")) {
+                if (i.indexOf("trojan") >= 0) {
+                    trojan_list.push(i.match(re));
+                }
+            }
 
-				console.group("load response");
-				// console.log(status);
-				console.log(xhr);
-				// console.log(response);
-				console.log(parseDom(response));
-				console.groupEnd();
+            tables = [];
+            for (trojan of trojan_list) {
+                tables.push([trojan[0], trojan[1], trojan[2]])
+            }
+            return tables
 
-				// $("#div1 > table").css("width", "100%").addClass("table table-sm table-bordered table-responsive-sm");
-				$("#div1 > table").addClass("table table-bordered");
+        }
 
-				// console.group("remove tip");
-				// $("#div1 > p").each(function (i) {
-				// 	if ($(this).text().indexOf("恭喜你，你脚本已经是最新，每周一更新密码和端口") >= 0) {
-				// 		console.log($(this)[0]);
-				// 		$(this).remove();
-				// 	};
-				// });
-				// console.groupEnd();
+        $(document).ready(function () {
+            $('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
-				// console.group("simplify title");
-				// type = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
-				// console.log(type.text());
-				// if (type.text().indexOf("类型")) {
-				// 	type.text("类型");
-				// 	console.log(type.text());
-				// }
-				// server = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(2)");
-				// console.log(server.text());
-				// if (server.text().indexOf("server address")) {
-				// 	server.text("server address");
-				// 	console.log(server.text());
-				// }
-				// password = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(3)");
-				// console.log(password.text());
-				// if (password.text().indexOf("password")) {
-				// 	password.text("password");
-				// 	console.log(password.text());
-				// }
-				// port = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(4)");
-				// console.log(port.text());
-				// if (port.text().indexOf("port")) {
-				// 	port.text("port");
-				// 	console.log(port.text());
-				// }
-				// console.groupEnd();
+            // $("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
+            $("#div1").load("./v2ray2_link.txt", function (response, status, xhr) {
+                $("#div1").hide();
+                $("#div1 > table").addClass("table table-bordered");
 
-				qrcode = $("#div1 > table > tbody > tr:nth-child(1) > th:nth-child(1)");
-				if (qrcode.html().indexOf("二维码") >= 0) {
-					console.group("simplify qrcode");
-					console.log(qrcode[0]);
-					qrcode.remove();
-					console.groupEnd();
-				}
+                $("#table1").show();
 
-				qrcode_img = $("#div1 > table > tbody > tr:nth-child(2) > td:nth-child(1)");
-				if (qrcode_img.html().indexOf("img") >= 0) {
-					console.group("simplify qrcode img");
-					console.log(qrcode_img[0]);
-					qrcode_img.remove();
-					console.groupEnd();
-				}
+                console.group("content of https://www.zkq8.com/v2ray2_link.txt");
+                window.resdom = parseDom(response);
+                console.log(resdom);
+                tip="";
+                for (i of resdom.children) {
+                    if (i.tagName == "P") {
+                        tip += i.innerText + "<br>"
+                    }
+                }
+                $('#info').append($(`<div class="alert alert-success"></div>`).append(tip));
 
-				rownum = $("#div1 > table > tbody > tr").length;
-				for (var i = 2; i <= rownum; i++) {
-					row = $("#div1 > table > tbody > tr:nth-child(" + i + ")");
-					if (row.text().indexOf("回复") >= 0 || row.text().indexOf("公众号") >= 0) {
-						console.group("simplify wechat");
-						console.log(row.html());
-						row.remove();
-						console.groupEnd();
-					}
-					if ($("td:nth-child(1)", row).text().indexOf("trojan") >= 0) {
-						console.group("simplify type");
-						console.log($("td:nth-child(1)", row).html());
-						$("td:nth-child(1)", row).text("trojan");
-						console.groupEnd();
-						let server = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(2)";
-						let password = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(3)";
-						let port = "#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(4)";
-						console.group("init copy of tr: " + i);
-						// console.log($("#div1 > table > tbody > tr:nth-child("+i+")")[0]);
-						copyof(server);
-						copyof(password);
-						copyof(port);
-						console.groupEnd();
-					}
+                console.groupEnd();
 
-					if ($("#div1 > table > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text().indexOf("暂无节点") >= 0) {
-						console.group("remove tr: " + i);
-						console.log($("#div1 > table > tbody > tr:nth-child(" + i + ")")[0]);
-						$("#div1 > table > tbody > tr:nth-child(" + i + ")").remove();
-						console.groupEnd();
-					}
+                console.group("torjan list");
+                trojan_list = getTrojan_list(response);
+                for (trojan of trojan_list) {
+                    console.log(trojan);
+                    html = `<tr><td>${trojan[0]}</td><td>${trojan[1]}</td><td>${trojan[2]}</td></tr>`;
+                    $("#table1 > tbody").append(html);
+                }
+                console.groupEnd();
 
-				}
+                $("#table1").addClass("table table-bordered");
+                rownum = $("#table1 > tbody > tr").length;
+                for (var i = 2; i <= rownum; i++) {
+                    let server = "#table1 > tbody > tr:nth-child(" + i + ") > td:nth-child(1)";
+                    let password = "#table1 > tbody > tr:nth-child(" + i + ") > td:nth-child(2)";
+                    let port = "#table1 > tbody > tr:nth-child(" + i + ") > td:nth-child(3)";
+                    console.group("init copy of tr: " + i);
+                    copyof(server);
+                    copyof(password);
+                    copyof(port);
+                    console.groupEnd();
+                }
+                showTip("<strong>提示：</strong>点击可直接复制", "info",100000);
 
-				showTip("<strong>提示：</strong>点击可直接复制", "info");
-
-			});
+            });
 
 
-		});
-	</script>
+        });
+    </script>
 </body>
 
 
