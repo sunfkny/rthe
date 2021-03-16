@@ -169,8 +169,7 @@
                 $("#div1").hide();
                 $("#div1 > table").addClass("table table-bordered");
 
-                $("#table1").show();
-
+                
                 console.group("content of https://www.zkq8.com/v2ray2_link.txt");
                 window.resdom = parseDom(response);
                 console.log(resdom);
@@ -181,17 +180,22 @@
                     }
                 }
                 $('#info').append($(`<div class="alert alert-success"></div>`).append(tip));
-
                 console.groupEnd();
 
+                
+                $("#table1").hide();
                 console.group("torjan list");
                 trojan_list = getTrojan_list(response);
+                th="<th>server</th><th>password</th><th>port</th>"
+                $("#table1 > tbody").append(th);
                 for (trojan of trojan_list) {
                     console.log(trojan);
                     html = `<tr><td>${trojan[0]}</td><td>${trojan[1]}</td><td>${trojan[2]}</td></tr>`;
                     $("#table1 > tbody").append(html);
                 }
                 console.groupEnd();
+                $("#table1").show();
+
 
                 $("#table1").addClass("table table-bordered");
                 rownum = $("#table1 > tbody > tr").length;
@@ -205,7 +209,7 @@
                     copyof(port);
                     console.groupEnd();
                 }
-                showTip("<strong>提示：</strong>点击可直接复制", "info",100000);
+                showTip("<strong>提示：</strong>点击可直接复制", "info");
 
             });
 
