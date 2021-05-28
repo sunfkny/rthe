@@ -92,7 +92,7 @@
 
         function copyof(jspath) {
             console.log($(jspath)[0]);
-            clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text(); } });
+            clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text().replace("\n",""); } });
             clipboard.on('success', function (e) {
                 showTip("<strong>复制成功：</strong>" + e.text, "success");
                 // console.info('Action:', e.action);
@@ -153,7 +153,8 @@
 
             tables = [];
             for (trojan of trojan_list) {
-                tables.push([trojan[0], trojan[1], trojan[2]])
+                // tables.push([trojan[0], trojan[1], trojan[2]])
+                tables.push([trojan[0], "加载中", trojan[1]])
             }
             return tables
 
@@ -162,13 +163,13 @@
         $(document).ready(function () {
             $('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
-            $("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
+            $("#div1").load(cors("https://www.youhou8.com/v2ray"), function (response, status, xhr) {
                 // $("#div1").load("./v2ray2_link.txt", function (response, status, xhr) {
                 $("#div1").hide();
                 $("#div1 > table").addClass("table table-bordered");
 
 
-                console.group("content of https://www.zkq8.com/v2ray2_link.txt");
+                console.group("content of https://www.youhou8.com/v2ray");
                 window.resdom = parseDom(response);
                 console.log(resdom);
                 tip = "";
@@ -194,6 +195,10 @@
                 console.groupEnd();
                 $("#table1").show();
 
+
+                $("#table1 > tbody > tr:nth-child(2) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd1"));
+                $("#table1 > tbody > tr:nth-child(3) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd2"));
+                
 
                 $("#table1").addClass("table table-bordered");
                 rownum = $("#table1 > tbody > tr").length;
