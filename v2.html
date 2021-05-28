@@ -144,7 +144,8 @@
             let domstr = "";
             domstr = str;
             trojan_list = [];
-            var re = new RegExp("(?<=<b>)[^<]*(?=</b>)", "g");
+            // var re = new RegExp("(?<=<b>)[^<]*(?=</b>)", "g");
+            var re = new RegExp("(?<=<b>)(.*?)(?=</b>)", "g");
             for (i of domstr.split("\n")) {
                 if (i.indexOf("trojan") >= 0) {
                     trojan_list.push(i.match(re));
@@ -154,7 +155,7 @@
             tables = [];
             for (trojan of trojan_list) {
                 // tables.push([trojan[0], trojan[1], trojan[2]])
-                tables.push([trojan[0], "加载中", trojan[1]])
+                tables.push([trojan[0], "加载中", trojan[2]])
             }
             return tables
 
