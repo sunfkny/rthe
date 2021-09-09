@@ -147,8 +147,9 @@
             // var re = new RegExp("(?<=<b>)[^<]*(?=</b>)", "g");
             var re = new RegExp("(?<=<b>)(.*?)(?=</b>)", "g");
             for (i of domstr.split("\n")) {
-                if (i.indexOf("trojan") >= 0) {
-                    trojan_list.push(i.match(re));
+                if (i.indexOf("pwd") >= 0) {
+                    res = i.match(re);
+                    trojan_list.push([res[1],res[2],res[3]]);
                 }
             }
 
