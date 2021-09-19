@@ -2,45 +2,45 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="data:;base64,=">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="data:;base64,=">
 
-	<!-- 新 Bootstrap4 核心 CSS 文件 -->
-	<!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <!-- <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
 
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<!-- <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> -->
-	<script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <!-- <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
 
-	<!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-	<!-- <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script> -->
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <!-- <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script> -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
-	<!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-	<!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <!-- <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-	<!-- 剪贴板 -->
-	<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+    <!-- 剪贴板 -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
-	<script>
-		var _hmt = _hmt || [];
-		(function () {
-			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?90b728e271c36bba7dbaf721120d177d";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
-	</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?90b728e271c36bba7dbaf721120d177d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 
 
 
 </head>
 
 <body class="my-3">
-<!--     <div class="container">
+    <!--     <div class="container">
         <div class="row clearfix">
             <div class="col-12 column">
                 <h3>
@@ -92,7 +92,7 @@
 
         function copyof(jspath) {
             console.log($(jspath)[0]);
-            clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text().replace("\n",""); } });
+            clipboard = new ClipboardJS(jspath, { text: function () { return $(jspath).text().replace("\n", ""); } });
             clipboard.on('success', function (e) {
                 showTip("<strong>复制成功：</strong>" + e.text, "success");
                 // console.info('Action:', e.action);
@@ -149,7 +149,7 @@
             for (i of domstr.split("\n")) {
                 if (i.indexOf("pwd") >= 0) {
                     res = i.match(re);
-                    trojan_list.push([res[1],res[2],res[3]]);
+                    trojan_list.push([res[1], res[2], res[3]]);
                 }
             }
 
@@ -165,13 +165,16 @@
         $(document).ready(function () {
             $('#div1').append($(`<div class="alert alert-info"></div>`).append("加载中..."));
 
-            $("#div1").load(cors("https://www.youhou8.com/v2ray"), function (response, status, xhr) {
-                // $("#div1").load("./v2ray2_link.txt", function (response, status, xhr) {
+            // $("#div1").load(cors("https://www.youhou8.com/v2ray"), function (response, status, xhr) {
+            $("#div1").load(cors("https://www.zkq8.com/v2ray2_link.txt"), function (response, status, xhr) {
+
+
                 $("#div1").hide();
                 $("#div1 > table").addClass("table table-bordered");
 
 
-                console.group("content of https://www.youhou8.com/v2ray");
+                // console.group("content of https://www.youhou8.com/v2ray");
+                console.group("content of https://www.zkq8.com/v2ray2_link.txt");
                 window.resdom = parseDom(response);
                 console.log(resdom);
                 tip = "";
@@ -198,9 +201,11 @@
                 $("#table1").show();
 
 
-                $("#table1 > tbody > tr:nth-child(2) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd1"));
-                $("#table1 > tbody > tr:nth-child(3) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd2"));
-                
+                // $("#table1 > tbody > tr:nth-child(2) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd1"));
+                // $("#table1 > tbody > tr:nth-child(3) > td:nth-child(2)").load(cors("https://www.youhou8.com/pwd2"));
+                $("#table1 > tbody > tr:nth-child(2) > td:nth-child(2)").load(cors("https://www.zkq8.com/trojan_pwd1.txt"));
+                $("#table1 > tbody > tr:nth-child(3) > td:nth-child(2)").load(cors("https://www.zkq8.com/trojan_pwd2.txt"));
+
 
                 $("#table1").addClass("table table-bordered");
                 rownum = $("#table1 > tbody > tr").length;
