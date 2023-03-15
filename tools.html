@@ -47,9 +47,10 @@
 
     <script>
         function bh3cn() {
-            url = "https://jsonp.afeld.me/?url=https%3A%2F%2Fwww.bh3.com%2Fcontent%2Fbh3Cn%2FgetContentList%3FpageSize%3D100%26pageNum%3D1%26channelId%3D177"
-            var funDownload = function (content, filename) {var eleLink = document.createElement('a');eleLink.download = filename;eleLink.style.display = 'none';var blob = new Blob([content]);eleLink.href = URL.createObjectURL(blob);document.body.appendChild(eleLink);eleLink.click();document.body.removeChild(eleLink);};
-            $.getJSON(url, function (result) { li = ''; result.data.list.forEach(function (i) { li += i.ext[0].value[0].url + '\n' }); console.group("获取图片链接数：" + result.data.list.length + " of " + result.data.total); console.log(li); console.groupEnd(); funDownload(li, "bh3wallpaper.txt") })
+            //url = "https://jsonp.afeld.me/?url=https%3A%2F%2Fwww.bh3.com%2Fcontent%2Fbh3Cn%2FgetContentList%3FpageSize%3D100%26pageNum%3D1%26channelId%3D177"
+            // $.getJSON(url, function (result) { li = ''; result.data.list.forEach(function (i) { li += i.ext[0].value[0].url + '\n' }); console.group("获取图片链接数：" + result.data.list.length + " of " + result.data.total); console.log(li); console.groupEnd(); funDownload(li, "bh3wallpaper.txt") })
+            let funDownload = function (content, filename) {var eleLink = document.createElement('a');eleLink.download = filename;eleLink.style.display = 'none';var blob = new Blob([content]);eleLink.href = URL.createObjectURL(blob);document.body.appendChild(eleLink);eleLink.click();document.body.removeChild(eleLink);};
+            fetch("https://cors.isteed.cc/https://www.bh3.com/content/bh3Cn/getContentList?pageSize=100&pageNum=1&channelId=177").then(i=>i.json()).then(result=>{li = ''; result.data.list.forEach(function (i) { li += i.ext[0].value[0].url + '\n' }); console.group("获取图片链接数：" + result.data.list.length + " of " + result.data.total); console.log(li); console.groupEnd(); funDownload(li, "bh3wallpaper.txt")})
         }
     </script>
 </body>
